@@ -36,8 +36,8 @@ const Header = () => {
           <SignedOut>
             <Button
               asChild
-              className="rounded-full px-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary-500 text-white"
-              size="sm"
+              className="rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary-500 text-white"
+              size="lg"
             >
               <Link href="/sign-in">Login</Link>
             </Button>

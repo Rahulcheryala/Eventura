@@ -19,13 +19,15 @@ const HeroImage = () => {
     transition-all duration-500"
     >
       {Images.map((image, index) => (
-        <div className="relative col-span-2 aspect-square clip-effect rounded-md">
+        <div
+          className="relative col-span-2 aspect-square clip-effect rounded-md"
+          key={index}
+        >
           <Image
-            key={index}
             src={`/assets/images/hero/${image.src}`}
             alt={`Image-${index + 1}`}
             fill
-            title={`Image-${index + 1}`}
+            // title={`Image-${index + 1}`}
             sizes="100%"
             className="object-cover"
           />

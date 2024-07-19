@@ -57,6 +57,7 @@ export async function POST(req: Request) {
   // console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
   // console.log("Webhook body:", body);
   if (eventType === "user.created") {
+    console.log("Creating a user");
     const { id, email_addresses, username, first_name, last_name, image_url } =
       evt.data;
 
@@ -83,6 +84,7 @@ export async function POST(req: Request) {
   }
 
   if (eventType === "user.deleted") {
+    console.log("Deleting a user");
     const { id } = evt.data;
     const deletedUser = await deleteUser(id!);
 
