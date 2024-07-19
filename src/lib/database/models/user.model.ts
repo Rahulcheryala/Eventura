@@ -28,10 +28,6 @@ const UserSchema = new Schema({
     type: String,
     required: false,
   },
-  password: {
-    type: String,
-    required: true,
-  },
 });
 
 const User = models.User || model("User", UserSchema);
