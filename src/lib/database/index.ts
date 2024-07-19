@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-let cachedDb = (global as any).mongoose || { conn: null, promise: null };
+let cached = (global as any).mongoose || { conn: null, promise: null };
 
 export const connectToDatabase = async () => {
-  if (cachedDb.conn) {
+  if (cached.conn) {
     console.log("Using existing database connection");
-    return cachedDb.conn;
+    return cached.conn;
   }
 
   if (!MONGODB_URI) {
@@ -16,14 +16,15 @@ export const connectToDatabase = async () => {
     );
   }
 
-  cachedDb.promise =
-    cachedDb.promise ||
+  cached.promise =
+    cached.promise ||
     mongoose.connect(MONGODB_URI, {
       dbName: "evently",
       bufferCommands: false,
+      connectTimeoutMS: 30000,
     });
 
-  cachedDb.conn = await cachedDb.promise;
+  cached.conn = await cached.promise;
   console.log("Connected to database");
-  return cachedDb.conn;
+  return cached.conn;
 };
