@@ -1,0 +1,123 @@
+.clip-effect {
+  clip-path: path(
+    "M 80 20 C 100 0 100 0 120 20 C 140 40 160 60 180 80 C 200 100 200 100 180 120 C 160 140 140 160 120 180 C 100 200 100 200 80 180 C 60 160 40 140 20 120 C 0 100 0 100 20 80 Z"
+  );
+  transition: filter 500ms, clip-path 500ms;
+
+  &:hover {
+    z-index: 20;
+    clip-path: path(
+      "M 0 0 C 100 0 100 0 200 0 C 200 50 200 50 200 80 C 200 100 200 100 200 120 C 200 150 200 150 200 200 C 100 200 100 200 0 200 C 0 150 0 150 0 120 C 0 100 0 100 0 80 Z"
+    );
+  }
+
+  &:not(:hover) {
+    animation: zIndexHack 500ms;
+  }
+}
+
+@keyframes zIndexHack {
+  0%,
+  100% {
+    z-index: 10;
+  }
+}
+
+section:hover > .clip-effect {
+  filter: brightness(0.5) saturate(0.75);
+}
+
+section > .clip-effect:hover {
+  filter: brightness(1) saturate(1.5);
+}
+
+@media (min-width: 1025px) {
+  .grid-cols-responsive {
+    grid-template-columns: repeat(6, 100px);
+    grid-template-rows: repeat(3, 100px);
+  }
+
+  .clip-effect {
+    &:nth-child(4) {
+      grid-column-start: 2;
+    }
+
+    &:nth-child(5) {
+      grid-column-start: 4;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .grid-cols-responsive {
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+  }
+
+  .clip-effect {
+    &:nth-child(3),
+    &:nth-child(6) {
+      grid-column-start: 2;
+    }
+  }
+}
+
+@media (min-width: 660px) and (max-width: 767px) {
+  .grid-cols-responsive {
+    grid-template-columns: repeat(6, 100px);
+    grid-template-rows: repeat(3, 100px);
+  }
+
+  .clip-effect {
+    &:nth-child(4) {
+      grid-column-start: 2;
+    }
+
+    &:nth-child(5) {
+      grid-column-start: 4;
+    }
+  }
+}
+
+@media (min-width: 451px) and (max-width: 659px) {
+  .grid-cols-responsive {
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+  }
+
+  .clip-effect {
+    &:nth-child(3),
+    &:nth-child(6) {
+      grid-column-start: 2;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .grid-cols-responsive {
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(8, 80px);
+  }
+
+  .clip-effect {
+    clip-path: path(
+      "M 64 16 C 80 0 80 0 96 16 C 112 32 128 48 144 64 C 160 80 160 80 144 96 C 128 112 112 128 96 144 C 80 160 80 160 64 144 C 48 128 32 112 16 96 C 0 80 0 80 16 64 Z"
+    );
+    transition: filter 500ms, clip-path 500ms;
+
+    &:hover {
+      z-index: 20;
+      clip-path: path(
+        "M 0 0 C 80 0 80 0 160 0 C 160 30 160 30 160 64 C 160 80 160 80 160 96 C 160 116 160 139 160 160 C 80 160 80 160 0 160 C 0 138 0 117 0 96 C 0 80 0 80 0 64 Z"
+      );
+    }
+
+    &:nth-child(odd) {
+      grid-column-start: 2;
+    }
+
+    &:nth-child(even) {
+      grid-column-start: 1;
+    }
+  }
+}
