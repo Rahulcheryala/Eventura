@@ -16,16 +16,18 @@ export const connectToDatabase = async () => {
     );
   }
 
-  cached.promise =
-    cached.promise ||
-    mongoose.connect(MONGODB_URI, {
-      dbName: "test database",
-      bufferCommands: false,
-      connectTimeoutMS: 30000,
-    });
+  // cached.promise =
+  //   cached.promise ||
+  //   mongoose.connect(MONGODB_URI, {
+  //     dbName: "test",
+  //     bufferCommands: false,
+  //     connectTimeoutMS: 30000,
+  //   });
+
+  cached.promise = cached.promise || mongoose.connect(MONGODB_URI);
 
   cached.conn = await cached.promise;
   console.log("Connected to database");
-  console.log(cached.conn);
+  // console.log(cached.conn);
   return cached.conn;
 };
