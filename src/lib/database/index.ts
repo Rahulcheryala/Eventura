@@ -24,10 +24,15 @@ export const connectToDatabase = async () => {
   //     connectTimeoutMS: 30000,
   //   });
 
-  cached.promise = cached.promise || mongoose.connect(MONGODB_URI);
+  cached.promise =
+    cached.promise ||
+    mongoose.connect(MONGODB_URI, {
+      bufferCommands: false,
+      connectTimeoutMS: 30000,
+    });
 
   cached.conn = await cached.promise;
   console.log("Connected to database");
-  // console.log(cached.conn);
+  console.log(cached.conn);
   return cached.conn;
 };
