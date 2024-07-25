@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="border-t">
+    <footer className="border-t select-none">
       <div className="wrapper flex-between flex flex-col sm:flex-row gap-3">
         <Link href="/" className="w-fit focus:outline-none">
           <Image

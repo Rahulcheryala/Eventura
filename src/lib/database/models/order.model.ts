@@ -8,6 +8,15 @@ export interface IOrder extends Document {
   buyer: { _id: string; firstName: string; lastName: string };
 }
 
+export type IOrderItem = {
+  _id: string;
+  totalAmount: string;
+  createdAt: Date;
+  eventTitle: string;
+  eventId: string;
+  buyer: string;
+};
+
 const OrderSchema = new Schema({
   stripeId: {
     type: String,

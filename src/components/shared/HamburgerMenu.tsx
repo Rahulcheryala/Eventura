@@ -33,7 +33,7 @@ const HamburgerMenu = () => {
 
       {/* Sliding Sheet */}
       <div
-        className={`fixed z-50 top-0 right-0 p-2 w-72 h-full flex flex-col bg-gray-100 transform transition-transform duration-500 ${
+        className={`fixed h-[100dvh] z-50 top-0 right-0 p-2 w-72 flex flex-col bg-gray-100 transform transition-transform duration-500 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

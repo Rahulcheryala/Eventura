@@ -1,5 +1,6 @@
 import { IEvent } from "@/lib/database/models/event.model";
 import EventCard from "./EventCard";
+import Pagination from "./Pagination";
 
 type CollectionProps = {
   data: IEvent[];
@@ -22,9 +23,11 @@ const Collection = ({
   totalPages,
   urlParamName,
 }: CollectionProps) => {
+  console.log("data length", data.length);
+
   return (
     <>
-      {data.length > 0 ? (
+      {Number(data.length) > 0 ? (
         <div className="flex flex-col items-center gap-10">
           <ul className="w-full grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
             {data.map((event) => {
@@ -43,6 +46,13 @@ const Collection = ({
           </ul>
 
           {/* Pagination controls */}
+          {totalPages && totalPages > 1 && (
+            <Pagination
+              urlParamName={urlParamName}
+              page={page}
+              totalPages={totalPages}
+            />
+          )}
         </div>
       ) : (
         <div className="wrapper min-h-52 w-full gap-3 bg-grey-50 text-center rounded-lg flex flex-col justify-center">

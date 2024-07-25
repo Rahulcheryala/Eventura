@@ -437,6 +437,10 @@ li.react-datepicker__time-list-item {
   }
 }
 
+.textarea::-webkit-scrollbar-thumb {
+  border: 0.18rem solid transparent;
+}
+
 .textarea::-webkit-scrollbar-track {
   margin-top: 0.5rem !important ;
 }

@@ -15,6 +15,10 @@ import Event from "../database/models/event.model";
 import Category from "../database/models/category.model";
 import { revalidatePath } from "next/cache";
 
+const getCategoryByName = async (name: string) => {
+  return Category.findOne({ name: { $regex: name, $options: "i" } });
+};
+
 const populateEvent = async (query: any) => {
   return query
     .populate({
@@ -121,14 +125,29 @@ export const getAllEvents = async ({
 }: GetAllEventsParams) => {
   try {
     await connectToDatabase();
-    const query = {};
-    const eventsQuery = Event.find(query)
+
+    const titleCondition = query
+      ? { title: { $regex: query, $options: "i" } }
+      : {};
+    const categoryCondition = category
+      ? await getCategoryByName(category)
+      : null;
+    const conditions = {
+      $and: [
+        titleCondition,
+        categoryCondition ? { category: categoryCondition._id } : {},
+      ],
+    };
+
+    const skipAmount = (Number(page) - 1) * limit;
+    // const query = {};
+    const eventsQuery = Event.find(conditions)
       .sort({ createdAt: "desc" })
       .skip(0)
       .limit(limit);
 
     const events = await populateEvent(eventsQuery);
-    const eventsCount = await Event.countDocuments(query);
+    const eventsCount = await Event.countDocuments(conditions);
 
     return {
       data: JSON.parse(JSON.stringify(events)),
