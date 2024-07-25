@@ -3,7 +3,11 @@ import { headerLinks } from "@/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const NavItems = () => {
+type NavItemsProps = {
+  toggleSheet?: () => void;
+};
+
+const NavItems = ({ toggleSheet }: NavItemsProps) => {
   const pathname = usePathname();
 
   return (
@@ -13,13 +17,14 @@ const NavItems = () => {
         return (
           <li
             key={link.label}
-            className={`${
+            className={`w-full ${
               isActive && "text-primary-500 flex-center p-medium-16"
             }`}
           >
             <Link
               href={link.href}
-              className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md md:rounded-full md:px-4 px-2 py-1 whitespace-nowrap"
+              className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md md:rounded-full md:px-4 px-2 py-1 whitespace-nowrap w-full text-left"
+              onClick={toggleSheet}
             >
               {link.label}
             </Link>

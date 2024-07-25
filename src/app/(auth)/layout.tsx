@@ -1,3 +1,4 @@
+import Spinner from "@/components/shared/Spinner";
 import { ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 
 export default function AuthLayout({
@@ -8,7 +9,9 @@ export default function AuthLayout({
   return (
     <main className="min-h-screen w-full flex items-center justify-center bg-primary-50 bg-dotted-pattern bg-cover bg-fixed bg-center">
       <ClerkLoading>
-        <div className="flex-center h-screen text-2xl">LOADING...</div>
+        <div className="flex-center h-screen text-2xl">
+          <Spinner />
+        </div>
       </ClerkLoading>
       <ClerkLoaded>{children}</ClerkLoaded>
     </main>

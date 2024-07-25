@@ -34,7 +34,8 @@
 
     --radius: 0.5rem;
 
-    --dateTimePicker: #624cf5;
+    --primary-500: #624cf5;
+    --primary-50: #f6f8fd;
   }
 
   .dark {
@@ -286,7 +287,7 @@ body {
   left: -60px !important;
 
   .react-datepicker__triangle {
-    stroke: var(--dateTimePicker) !important;
+    stroke: var(--primary-500) !important;
     stroke-width: 0px !important;
   }
 
@@ -306,19 +307,19 @@ body {
 }
 
 .react-datepicker {
-  outline: 2px solid var(--dateTimePicker) !important;
+  outline: 2px solid var(--primary-500) !important;
   border-radius: 1rem !important;
 }
 
 .react-datepicker__month-container {
   float: none !important;
   display: inline-block !important;
-  border-right: 2px solid var(--dateTimePicker) !important;
+  border-right: 2px solid var(--primary-500) !important;
 }
 
 .react-datepicker__header {
   border-top-left-radius: 0.9rem !important;
-  border-bottom: 2px solid var(--dateTimePicker) !important;
+  border-bottom: 2px solid var(--primary-500) !important;
 }
 
 .react-datepicker__month {
@@ -355,25 +356,6 @@ body {
   scroll-snap-type: y mandatory !important;
 }
 
-.react-datepicker__time-list::-webkit-scrollbar,
-.textarea::-webkit-scrollbar {
-  width: 0.75rem !important;
-}
-
-.react-datepicker__time-list::-webkit-scrollbar-thumb,
-.textarea::-webkit-scrollbar-thumb {
-  background-color: var(--dateTimePicker) !important;
-  border-radius: 0.5rem !important;
-  border: 0.15rem solid transparent;
-  background-clip: content-box;
-}
-
-.react-datepicker__time-list::-webkit-scrollbar-track,
-.textarea::-webkit-scrollbar-track {
-  background-color: transparent !important;
-  margin-bottom: 0.5rem !important;
-}
-
 li.react-datepicker__time-list-item {
   padding: 0.5rem 0.5rem !important;
   display: inline-flex !important;
@@ -394,13 +376,13 @@ li.react-datepicker__time-list-item {
 }
 
 .react-datepicker__day--selected {
-  background-color: var(--dateTimePicker) !important;
+  background-color: var(--primary-500) !important;
   color: #ffffff !important;
   border-radius: 100% !important;
 }
 
 .react-datepicker__time-list-item--selected {
-  background-color: var(--dateTimePicker) !important;
+  background-color: var(--primary-500) !important;
 }
 
 @media screen and (max-width: 400px) {
@@ -435,6 +417,37 @@ li.react-datepicker__time-list-item {
     padding: 0rem 0rem !important;
     font-weight: 500 !important;
   }
+}
+
+/* ======================================= SCROLLBAR STYLES */
+
+body::-webkit-scrollbar {
+  width: 1.2rem !important;
+}
+
+.react-datepicker__time-list::-webkit-scrollbar,
+.textarea::-webkit-scrollbar {
+  width: 0.75rem !important;
+}
+
+body::-webkit-scrollbar-thumb,
+.react-datepicker__time-list::-webkit-scrollbar-thumb,
+.textarea::-webkit-scrollbar-thumb {
+  background-color: var(--primary-500) !important;
+  border-radius: 5rem !important;
+  border: 0.15rem solid transparent;
+  background-clip: content-box;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--primary-50) !important;
+  margin-block: 0.25rem !important;
+}
+
+.react-datepicker__time-list::-webkit-scrollbar-track,
+.textarea::-webkit-scrollbar-track {
+  background-color: transparent !important;
+  margin-bottom: 0.5rem !important;
 }
 
 .textarea::-webkit-scrollbar-thumb {

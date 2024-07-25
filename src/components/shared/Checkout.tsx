@@ -4,8 +4,6 @@ import { Button } from "../ui/button";
 import { loadStripe } from "@stripe/stripe-js";
 import { checkOutOrder } from "@/lib/actions/order.actions";
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
@@ -24,7 +22,6 @@ const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
   }, []);
 
   const onCheckout = async () => {
-    // console.log("checkout");
     const order = {
       eventId: event._id,
       eventTitle: event.title,
@@ -37,10 +34,7 @@ const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
   };
 
   return (
-    <form
-      action={onCheckout}
-      // method="post"
-    >
+    <form action={onCheckout} method="post">
       <Button type="submit" role="link" size="lg" className="button sm:w-fit">
         {event.isFree ? "Get Registered" : "Buy Ticket"}
       </Button>

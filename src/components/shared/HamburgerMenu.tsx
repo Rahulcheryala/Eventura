@@ -60,7 +60,7 @@ const HamburgerMenu = () => {
           {/* Separator */}
           <div className="w-full border border-gray-300 my-4"></div>
 
-          <NavItems />
+          <NavItems toggleSheet={toggleSheet} />
         </div>
       </div>
     </div>
