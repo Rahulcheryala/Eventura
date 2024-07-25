@@ -51,8 +51,9 @@ const HamburgerMenu = () => {
             <Image
               src="/assets/images/logo.svg"
               alt="Evently Logo"
-              width={128}
-              height={38}
+              width={518}
+              height={120}
+              className="w-32 h-auto"
             />
           </Link>
 

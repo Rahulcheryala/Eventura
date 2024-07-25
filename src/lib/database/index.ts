@@ -33,6 +33,6 @@ export const connectToDatabase = async () => {
 
   cached.conn = await cached.promise;
   console.log("Connected to database");
-  console.log(cached.conn);
+  // console.log(cached.conn);
   return cached.conn;
 };

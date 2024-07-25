@@ -1,8 +1,18 @@
+import Collection from "@/components/shared/Collection";
 import HeroImage from "@/components/shared/HeroImage";
 import { Button } from "@/components/ui/button";
+import { getAllEvents } from "@/lib/actions/event.actions";
 import Link from "next/link";
 
-const Home = () => {
+const Home = async () => {
+  const events = await getAllEvents({
+    query: "",
+    category: "",
+    limit: 6,
+    page: 1,
+  });
+  // console.log(events);
+
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 lg:py-10">
@@ -35,6 +45,16 @@ const Home = () => {
         <div className="flex w-full flex-col gap-5 md:flex-row">
           Search for events Category Filter
         </div>
+
+        <Collection
+          data={events?.data}
+          emptyTitle="No Events Found"
+          emptyStateSubtext="Come back later"
+          collectionType="All_Events"
+          limit={6}
+          page={1}
+          totalPages={2}
+        />
       </section>
     </>
   );

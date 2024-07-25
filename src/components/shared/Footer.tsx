@@ -9,8 +9,9 @@ const Footer = () => {
           <Image
             src="/assets/images/logo.svg"
             alt="Evently Logo"
-            width={100}
-            height={20}
+            width={518}
+            height={120}
+            className="w-24 h-auto"
           />
         </Link>
         <p className="text-sm text-gray-500 tracking-wide">

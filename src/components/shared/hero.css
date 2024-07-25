@@ -34,7 +34,7 @@ section > .clip-effect:hover {
 @media (min-width: 1025px) {
   .grid-cols-responsive {
     grid-template-columns: repeat(6, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-rows: repeat(4, 100px);
   }
 
   .clip-effect {
@@ -65,7 +65,7 @@ section > .clip-effect:hover {
 @media (min-width: 660px) and (max-width: 767px) {
   .grid-cols-responsive {
     grid-template-columns: repeat(6, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-rows: repeat(4, 100px);
   }
 
   .clip-effect {
@@ -96,7 +96,7 @@ section > .clip-effect:hover {
 @media (max-width: 450px) {
   .grid-cols-responsive {
     grid-template-columns: repeat(3, 80px);
-    grid-template-rows: repeat(8, 80px);
+    grid-template-rows: repeat(9, 80px);
   }
 
   .clip-effect {

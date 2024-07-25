@@ -16,8 +16,9 @@ const Header = () => {
           <Image
             src="/assets/images/logo.svg"
             alt="Evently Logo"
-            width={128}
-            height={38}
+            width={518}
+            height={120}
+            className="w-32 h-auto"
           />
         </Link>
 
@@ -34,11 +35,7 @@ const Header = () => {
           </SignedIn>
 
           <SignedOut>
-            <Button
-              asChild
-              className="rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary-500 text-white"
-              size="lg"
-            >
+            <Button asChild className="rounded-full text-white" size="lg">
               <Link href="/sign-in">Login</Link>
             </Button>
           </SignedOut>
