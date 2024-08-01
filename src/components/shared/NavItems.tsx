@@ -17,13 +17,13 @@ const NavItems = ({ toggleSheet }: NavItemsProps) => {
         return (
           <li
             key={link.label}
-            className={`w-full ${
-              isActive && "text-primary-500 flex-center p-medium-16"
+            className={`w-full flex-center ${
+              isActive && "text-primary-500 p-medium-16"
             }`}
           >
             <Link
               href={link.href}
-              className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md md:rounded-full md:px-4 px-2 py-1 whitespace-nowrap w-full text-left"
+              className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md md:rounded-full md:px-4 px-2 py-1 w-full whitespace-nowrap md:text-center"
               onClick={toggleSheet}
             >
               {link.label}

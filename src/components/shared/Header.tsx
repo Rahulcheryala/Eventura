@@ -11,14 +11,22 @@ const Header = () => {
       <div className="wrapper flex-between">
         <Link
           href="/"
-          className="w-fit focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md ring-offset-4"
+          className="w-fit focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md ring-offset-4 flex flex-nowrap gap-2.5"
         >
           <Image
             src="/assets/images/logo.svg"
-            alt="Evently Logo"
-            width={518}
+            alt="Eventura Logo"
+            width={120}
             height={120}
-            className="w-32 h-auto"
+            className="w-8 h-auto"
+          />
+          <Image
+            src="/assets/images/Eventura.svg"
+            alt="Eventura Logo"
+            width={350}
+            height={65}
+            priority
+            className="w-24 h-auto"
           />
         </Link>
 
@@ -28,7 +36,7 @@ const Header = () => {
           </nav>
         </SignedIn>
 
-        <div className="flex w-fit gap-3">
+        <div className="w-fit flex">
           <SignedIn>
             <UserButton />
             <HamburgerMenu />

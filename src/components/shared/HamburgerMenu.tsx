@@ -47,13 +47,24 @@ const HamburgerMenu = () => {
         </button>
 
         <div className="flex-1 px-2 bg-inherit md:hidden">
-          <Link href="/" tabIndex={-1} className="w-full">
+          <Link
+            href="/"
+            tabIndex={-1}
+            className="w-full flex flex-nowrap gap-2"
+          >
             <Image
               src="/assets/images/logo.svg"
-              alt="Evently Logo"
-              width={518}
+              alt="Eventura Logo"
+              width={120}
               height={120}
-              className="w-32 h-auto"
+              className="w-7 h-auto"
+            />
+            <Image
+              src="/assets/images/Eventura.svg"
+              alt="Eventura Logo"
+              width={350}
+              height={65}
+              className="w-20 h-auto"
             />
           </Link>
 

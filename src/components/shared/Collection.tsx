@@ -23,7 +23,7 @@ const Collection = ({
   totalPages,
   urlParamName,
 }: CollectionProps) => {
-  console.log("data length", data.length);
+  // console.log("data length", data.length);
 
   return (
     <>
