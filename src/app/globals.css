@@ -79,6 +79,7 @@
 
 body {
   font-family: var(--font-poppins);
+  cursor: url("/assets/icons/cursor.png") 12 12, auto;
 }
 
 .filter-grey {
@@ -86,22 +87,10 @@ body {
     hue-rotate(32deg) brightness(98%) contrast(92%);
 }
 
-.diamond-clip-path {
-  clip-path: path(
-    "M 80 20 C 100 0 100 0 120 20 C 140 40 160 60 180 80 C 200 100 200 100 180 120 C 160 140 140 160 120 180 C 100 200 100 200 80 180 C 60 160 40 140 20 120 C 0 100 0 100 20 80 Z"
-  );
-}
-
-.square-clip-path {
-  clip-path: path(
-    "M 0 0 C 100 0 100 0 200 0 C 200 50 200 50 200 80 C 200 100 200 100 200 120 C 200 150 200 150 200 200 C 100 200 100 200 0 200 C 0 150 0 150 0 120 C 0 100 0 100 0 80 Z"
-  );
-}
-
 /* ========================================== TAILWIND STYLES */
 @layer utilities {
   .wrapper {
-    @apply max-w-7xl lg:mx-auto p-5 md:px-10 xl:px-6 w-full;
+    @apply max-w-7xl lg:mx-auto px-5 py-4 md:px-10 xl:px-6 w-full;
   }
 
   .flex-center {
@@ -256,7 +245,7 @@ body {
 }
 
 .cl-userButtonBox {
-  flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
 }
 
 .cl-userButtonOuterIdentifier {

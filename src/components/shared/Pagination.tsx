@@ -15,13 +15,17 @@ const Pagination = ({ page, totalPages, urlParamName }: PaginationProps) => {
   const searchParams = useSearchParams();
 
   const onClick = (btnType: string) => {
+    // Calculate the new page value based on button type ("next" or "previous")
     const pageValue = btnType === "next" ? Number(page) + 1 : Number(page) - 1;
+
+    // Form the new URL with updated page parameter
     const newURL = formUrlQuery({
-      params: searchParams.toString(),
-      key: urlParamName || "page",
-      value: pageValue.toString(),
+      params: searchParams.toString(), // Convert current search parameters to a string
+      key: urlParamName || "page", // Use provided URL parameter name or default to "page"
+      value: pageValue.toString(), // Convert the new page value to a string
     });
 
+    // Navigate to the new URL without scrolling the page
     router.push(newURL, { scroll: false });
   };
 

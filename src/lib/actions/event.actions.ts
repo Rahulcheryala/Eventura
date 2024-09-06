@@ -37,16 +37,22 @@ export const createEvent = async ({
   try {
     await connectToDatabase();
 
+    // Find the organizer by userId
     const organizer = await User.findById(userId);
     if (!organizer) {
+      // Throw an error if the organizer is not found
       throw new Error("Organizer not found.");
     }
 
+    // Create a new event with the provided event data
     const newEvent = await Event.create({
       ...event,
-      category: event.categoryId,
-      organizer: userId,
+      category: event.categoryId, // Assign the category from event.categoryId
+      organizer: userId, // Assign userId as the organizer
     });
+
+    // Revalidate the specified path to update static content
+    revalidatePath(path);
 
     return JSON.parse(JSON.stringify(newEvent));
   } catch (error) {
@@ -119,19 +125,24 @@ export const getEventById = async (eventId: string) => {
 
 export const getAllEvents = async ({
   query,
-  limit = 6,
+  limit = 3,
   page,
   category,
 }: GetAllEventsParams) => {
   try {
     await connectToDatabase();
 
+    // Create a condition for the title using a case-insensitive regex if a query is provided
     const titleCondition = query
       ? { title: { $regex: query, $options: "i" } }
       : {};
+
+    // Fetch the category object by its name if a category is provided
     const categoryCondition = category
       ? await getCategoryByName(category)
       : null;
+
+    // Combine the conditions using the $and operator
     const conditions = {
       $and: [
         titleCondition,
@@ -139,14 +150,21 @@ export const getAllEvents = async ({
       ],
     };
 
+    // Calculate the number of documents to skip for pagination
+    // When in page 1, skipAmount will be 0, so the first 3 documents will be returned
+    // When in page 2, skipAmount will be 3, so the next 3 documents will be returned, and so on
     const skipAmount = (Number(page) - 1) * limit;
-    // const query = {};
-    const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: "desc" })
-      .skip(0)
-      .limit(limit);
 
+    // Create the query to fetch events with the specified conditions, sorting, and pagination
+    const eventsQuery = Event.find(conditions)
+      .sort({ createdAt: "desc" }) // sorts the documents in descending order of creation date
+      .skip(skipAmount) // This skips a specified number of documents in the result set, useful for pagination
+      .limit(limit); // This limits the number of documents returned to the specified limit, useful for controlling the number of results per page in pagination.
+
+    // Execute the query and populate organizer and category fields with their name instead of their IDs
     const events = await populateEvent(eventsQuery);
+
+    // Count the total number of documents that match the conditions
     const eventsCount = await Event.countDocuments(conditions);
 
     return {

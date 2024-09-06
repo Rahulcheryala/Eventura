@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^5.2.4",
+    "@clerk/themes": "^2.1.21",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-checkbox": "^1.1.1",
@@ -24,6 +25,7 @@
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.1",
     "next": "14.2.5",
+    "next-themes": "^0.3.0",
     "query-string": "^9.0.0",
     "react": "^18",
     "react-datepicker": "^7.3.0",

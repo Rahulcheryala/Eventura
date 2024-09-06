@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import NavItems from "./NavItems";
@@ -13,6 +13,16 @@ const HamburgerMenu = () => {
   const toggleSheet = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      // Disable scrolling when the sheet is open
+      document.body.style.overflow = "hidden";
+    } else {
+      // Enable scrolling when the sheet is closed
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
 
   return (
     <div className="relative md:hidden">
@@ -28,7 +38,7 @@ const HamburgerMenu = () => {
 
       {/* Full-screen overlay with blur effect */}
       {isOpen && (
-        <div className="fixed z-40 inset-0 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity duration-1000"></div>
+        <div className="fixed z-40 w-[100vw] h-[100dvh] inset-0 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity duration-1000"></div>
       )}
 
       {/* Sliding Sheet */}

@@ -26,7 +26,7 @@ const ErrorHandler = ({ error, reset }: ErrorHandlerProps) => {
         <div className="mt-4 grid grid-cols-[fit-content(100%),1ch,fit-content(100%)] text-base md:text-lg font-semibold justify-center items-center gap-2">
           <span className=" text-red-500">Error Message</span>
           <span className=" text-red-500">:</span>
-          <p className=" text-gray-600">{error.message}</p>
+          <p className=" text-gray-600 font-light text-sm">{error.message}</p>
           {/* <span className=" text-green-600">Suggested Solution</span>
           <span className=" text-green-600">:</span>
           <p className=" text-gray-600">Please try again later.</p> */}

@@ -100,6 +100,17 @@ export function removeKeysFromQuery({
 }
 
 export const handleError = (error: unknown) => {
-  console.error(error);
-  throw new Error(typeof error === "string" ? error : JSON.stringify(error));
+  console.log(error);
+
+  // Check if the error is an object and has an errorResponse property
+  if (typeof error === "object" && error !== null && "errorResponse" in error) {
+    const errorObj = (error as { errorResponse: { code: number } })
+      .errorResponse;
+    if (errorObj.code === 51024) {
+      throw Error("Page number cannot be negative");
+    }
+  }
+
+  // For other types or cases, throw a generic error
+  // throw new Error(typeof error === "string" ? error : JSON.stringify(error));
 };

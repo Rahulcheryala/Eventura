@@ -11,6 +11,7 @@ const NavItems = ({ toggleSheet }: NavItemsProps) => {
   const pathname = usePathname();
 
   return (
+    // Nav links for navigation
     <ul className=" w-full flex flex-col md:flex-row md:items-center items-start gap-5">
       {headerLinks.map((link) => {
         const isActive = pathname === link.href;

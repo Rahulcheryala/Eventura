@@ -1,7 +1,8 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import eventFormSchema from "@/lib/validator";
 
 import { useState } from "react";
@@ -28,6 +29,7 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import { createEvent, updateEvent } from "@/lib/actions/event.actions";
 import { IEvent } from "@/lib/database/models/event.model";
+import { handleError } from "@/lib/utils";
 
 type EventFormProps = {
   userId: string;
@@ -36,8 +38,8 @@ type EventFormProps = {
   eventId?: string;
 };
 
-const tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
+// const tomorrow = new Date();
+// tomorrow.setDate(tomorrow.getDate() + 1);
 
 const setTime = (hours: any, minutes: any) => {
   const date = new Date();
@@ -47,52 +49,60 @@ const setTime = (hours: any, minutes: any) => {
 };
 
 const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
-  const [files, setFiles] = useState<File[]>([]);
+  const Router = useRouter();
+
+  // Set initial form values based on whether the event is being created or updated
   const initialValues =
     event && type === "Update"
       ? {
           ...event,
+          categoryId: event.category._id,
           startDateTime: new Date(event.startDateTime),
           endDateTime: new Date(event.endDateTime),
         }
       : eventDefaultValues;
-  const Router = useRouter();
 
+  // State to manage the files for image upload
+  const [files, setFiles] = useState<File[]>([]);
+
+  // Destructure the startUpload function for image uploading
   const { startUpload } = useUploadThing("imageUploader");
 
-  // 1. Define your form.
+  // 1. Define your form with initial values and validation schema defined in validator.ts
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
     defaultValues: initialValues,
   });
 
-  // 2. Define a submit handler.
+  // 2. Define a submit handler to handle form submission
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    // console.log(values);
-
+    // Initialize the image URL with the existing value
     let uploadedImageURL = values.imageURL;
 
+    // If there are files to upload, upload them and get the URL
     if (files.length > 0) {
       const uploadedImages = await startUpload(files);
 
+      // If the upload fails, stop the submission
       if (!uploadedImages) {
         return;
       }
 
+      // Update the image URL with the URL of the uploaded image
       uploadedImageURL = uploadedImages[0].url;
     }
 
+    // Handle event creation
     if (type === "Create") {
-      // Create event
       try {
+        // Create a new event with the form values and uploaded image URL
         const newEvent = await createEvent({
           userId,
           event: { ...values, imageURL: uploadedImageURL },
           path: "/profile",
         });
 
+        // If the event is created successfully, reset the form and navigate to the event page
         if (newEvent) {
           form.reset();
           Router.push(`/events/${newEvent._id}`);
@@ -100,23 +110,27 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
 
         console.log("NEW event created", newEvent);
       } catch (error) {
-        console.error(error);
+        handleError(error);
       }
     }
 
+    // Handle event update
     if (type === "Update") {
+      // If no event ID is provided, go back to the previous page
       if (!eventId) {
         Router.back();
         return;
       }
-      // Update event
+
       try {
+        // Update the existing event with the form values and uploaded image URL
         const updatedEvent = await updateEvent({
           userId,
           event: { ...values, imageURL: uploadedImageURL, _id: eventId },
           path: `/events/${eventId}`,
         });
 
+        // If the event is updated successfully, reset the form and navigate to the updated event page
         if (updatedEvent) {
           form.reset();
           Router.push(`/events/${updatedEvent._id}`);
@@ -124,7 +138,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
 
         console.log("Event Updated", updatedEvent);
       } catch (error) {
-        console.error(error);
+        console.log("Error", error);
       }
     }
   }
@@ -264,7 +278,8 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeIntervals={30}
                       timeCaption="time"
                       dateFormat="dd/MM/yyyy h:mm aa"
-                      className="input-field pl-3"
+                      onKeyDown={(e) => e.preventDefault()}
+                      className="input-field pl-3 caret-transparent"
                       wrapperClassName="datePicker"
                     />
                   </div>
@@ -297,12 +312,13 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       onChange={(date: Date | null) => field.onChange(date)}
                       showTimeSelect
                       timeFormat="hh:mm aa"
-                      minTime={setTime(9, 0)} // Set min time to 9:00 AM
+                      minTime={form.getValues("startDateTime")} // Set min time to 9:00 AM
                       maxTime={setTime(23, 0)} // Set max time to 11:00 PM
                       timeIntervals={30}
                       timeCaption="time"
                       dateFormat="dd/MM/yyyy h:mm aa"
-                      className="input-field pl-3"
+                      onKeyDown={(e) => e.preventDefault()}
+                      className="input-field pl-3 caret-transparent"
                       wrapperClassName="datePicker"
                     />
                   </div>

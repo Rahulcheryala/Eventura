@@ -17,26 +17,35 @@ const Search = ({
   const router = useRouter();
 
   useEffect(() => {
+    // Set a timeout to delay the execution of the URL update and hence the API call to the server
+    // By doing this, we can prevent multiple API calls when the user types quickly
     const delayDebounceFn = setTimeout(() => {
       let newURL = "";
+
+      // If there's a query, update the URL with the query parameter
       if (query) {
         newURL = formUrlQuery({
-          params: searchParams.toString(),
-          key: "query",
-          value: query,
+          params: searchParams.toString(), // Convert search parameters to a string
+          key: "query", // The key to update
+          value: query, // The value to set for the key
         });
       } else {
+        // If there's no query, remove the query parameter from the URL
         newURL = removeKeysFromQuery({
-          params: searchParams.toString(),
-          keysToRemove: ["query"],
+          params: searchParams.toString(), // Convert search parameters to a string
+          keysToRemove: ["query"], // The keys to remove
         });
       }
 
+      // Push the new URL to the router without scrolling the page
       router.push(newURL, { scroll: false });
-    }, 300);
+    }, 300); // Delay of 300 milliseconds
 
-    return () => clearTimeout(delayDebounceFn);
-  }, [query, searchParams, router]);
+    // Clear the timeout if the effect is cleaned up (e.g., the query changes before 300ms)
+    return () => {
+      clearTimeout(delayDebounceFn);
+    };
+  }, [query, searchParams, router]); // Dependencies array
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -60,7 +69,7 @@ const Search = ({
         placeholder={placeholder}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full pl-10 rounded-full bg-transparent border-0 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none focus:ring-0 md:placeholder:text-[1rem] focus:placeholder:text-primary-500 peer "
+        className="w-full pl-10 rounded-full bg-transparent border-0 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none focus:ring-0 md:placeholder:text-[1rem] focus:placeholder:text-primary-500 peer"
       />
       <IoIosSearch
         size={24}

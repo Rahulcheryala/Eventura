@@ -23,6 +23,7 @@ const EventCard = ({ event, hasOrderLink, hidePrice }: CardProps) => {
         tabIndex={-1}
         href={`/events/${event._id}`}
         style={{ backgroundImage: `url(${event.imageURL})` }}
+        aria-label="Event Image"
         className="link flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500"
       />
 

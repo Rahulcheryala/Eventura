@@ -7,7 +7,6 @@ type CollectionProps = {
   emptyTitle: string;
   emptyStateSubtext: string;
   collectionType?: "All_Events" | "Events_Organized" | "My_Tickets";
-  limit: number;
   page: number | string;
   totalPages?: number;
   urlParamName?: string;
@@ -18,7 +17,6 @@ const Collection = ({
   emptyTitle,
   emptyStateSubtext,
   collectionType,
-  limit,
   page,
   totalPages,
   urlParamName,
@@ -29,10 +27,13 @@ const Collection = ({
     <>
       {Number(data.length) > 0 ? (
         <div className="flex flex-col items-center gap-10">
-          <ul className="w-full grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
+          <ul className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-10">
             {data.map((event) => {
               const hasOrderLink = collectionType === "Events_Organized";
+              // Show orders link only for events organized by the user
               const hidePrice = collectionType === "My_Tickets";
+              // Hide price for events the user has booked tickets for
+
               return (
                 <li key={event._id} className="flex justify-center w-full">
                   <EventCard
