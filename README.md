@@ -1,6 +1,6 @@
 
 # Eventura <a href="https://evently-event-management-nextjs-lime.vercel.app/" target="_blank">🔗</a>
-
+![Lighthouse Review Score](https://github.com/Rahulcheryala/Eventura/blob/main/public/assets/images/Lighthouse.png?raw=true)
 
 Welcome to Eventura, your ultimate solution for seamless event hosting and management. This ReadMe will guide you through the project's tech stack, features, and steps to get started.
 
