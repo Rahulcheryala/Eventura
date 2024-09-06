@@ -65,6 +65,7 @@ const Search = ({
     <div className="flex-center md:min-h-13 w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2 relative">
       <Input
         ref={inputRef}
+        id="search"
         type="text"
         placeholder={placeholder}
         value={query}

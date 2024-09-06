@@ -53,12 +53,13 @@ const CategoryFilter = () => {
 
   return (
     <Select
+      aria-label="Category Filter"
       name="category"
       onValueChange={(value: string) => {
         onSelectCategory(value);
       }}
     >
-      <SelectTrigger className="select-field">
+      <SelectTrigger className="select-field" aria-label="Select a Category">
         <div className="flex gap-3">
           <CiFilter size={24} />
           <SelectValue placeholder="Category" />

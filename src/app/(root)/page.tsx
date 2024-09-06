@@ -9,7 +9,7 @@ import Link from "next/link";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 const Home = async ({ searchParams }: SearchParamProps) => {
-  console.log(searchParams);
+  // console.log(searchParams);
   const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || "";
   const category = (searchParams?.category as string) || "";

@@ -28,6 +28,7 @@ const HamburgerMenu = () => {
     <div className="relative md:hidden">
       {/* Sheet Trigger */}
       <button
+        aria-label="Open Navigation Menu"
         className={`p-2 rounded-full hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ring-offset-1 transition-transform duration-500 ${
           isOpen && "-rotate-180"
         }`}
@@ -48,6 +49,7 @@ const HamburgerMenu = () => {
         }`}
       >
         <button
+          aria-label="Close Navigation Menu"
           className={`m-1 p-0.5 block ml-auto focus:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-full transition-all duration-300 ${
             isOpen ? "-rotate-180" : "rotate-180"
           }`}
