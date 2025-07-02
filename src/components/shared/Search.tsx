@@ -45,7 +45,7 @@ const Search = ({
     return () => {
       clearTimeout(delayDebounceFn);
     };
-  }, [query, searchParams, router]); // Dependencies array
+  }, [query, searchParams, router]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

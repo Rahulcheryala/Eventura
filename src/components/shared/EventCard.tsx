@@ -21,6 +21,7 @@ const EventCard = ({ event, hasOrderLink, hidePrice }: CardProps) => {
     <div className="relative flex flex-col min-h-96 w-full max-w-96 overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg ">
       <Link
         tabIndex={-1}
+        scroll={true}
         href={`/events/${event._id}`}
         style={{ backgroundImage: `url(${event.imageURL})` }}
         aria-label="Event Image"

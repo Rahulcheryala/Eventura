@@ -66,7 +66,11 @@ const CategoryFilter = () => {
         </div>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="All" className="select-item p-regular-14">
+        <SelectItem
+          value="All"
+          className="select-item p-regular-14"
+          aria-label="All"
+        >
           All
         </SelectItem>
 
@@ -74,6 +78,7 @@ const CategoryFilter = () => {
           <SelectItem
             key={category._id}
             value={category.name}
+            aria-label={category.name}
             className="select-item p-regular-14"
           >
             {category.name}

@@ -67,16 +67,20 @@ export const formatPrice = (price: string) => {
 };
 
 export function formUrlQuery({ params, key, value }: UrlQueryParams) {
+  // using parse function from query-string(qs) to parse the query string
+  // => query=frontend to { query: 'frontend' }
   const currentUrl = qs.parse(params);
 
+  // this updates the currentUrl object with the new key-value pair
   currentUrl[key] = value;
 
+  // utilizing the stringifyUrl function to update the query string as a Url at a given path
   return qs.stringifyUrl(
     {
       url: window.location.pathname,
       query: currentUrl,
     },
-    { skipNull: true }
+    { skipNull: true } // removes the null or undefined values from the query string
   );
 }
 
